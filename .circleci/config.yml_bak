@@ -6,6 +6,7 @@ executors:
     docker:
       # NOTE: Update this from https://github.com/envoyproxy/envoy-build-tools/blob/master/toolchains/rbe_toolchains_config.bzl#L8
       - image: envoyproxy/envoy-build-ubuntu:b480535e8423b5fd7c102fd30c92f4785519e33a
+    resource_class: xlarge
     working_directory: /source
 
 jobs:
@@ -61,6 +62,9 @@ workflows:
   version: 2
   all:
     jobs:
+      - api
+      - go_control_plane_mirror
+      - filter_example_mirror
       - docs:
           filters:
             tags:
